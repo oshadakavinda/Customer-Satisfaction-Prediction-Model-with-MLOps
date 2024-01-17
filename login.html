@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up/In - Finance Tracker</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<!-- Sign Up/In Form -->
+<div class="sign-form-container">
+    <h2 id="form-title">Sign Up</h2>
+    <form action="index.html" method="get" id="sign-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email" id="email-label">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label class="checkbox-label" id="checkbox-label">
+            <input type="checkbox" id="updates" name="updates">
+            <span>Receive Product Updates</span>
+        </label>
+
+        <button type="submit" id="submit-btn">Sign Up</button>
+    </form>
+
+    <p class="signin-link" id="toggle-signin">Already have an account? <a href="#">Sign In</a></p>
+</div>
+
+<script>
+    document.getElementById('toggle-signin').addEventListener('click', function() {
+        var formTitle = document.getElementById('form-title');
+        var email = document.getElementById("email");
+        var signInLink = document.getElementById('toggle-signin');
+        var form = document.getElementById('sign-form');
+        var emailLabel = document.getElementById('email-label');
+        var checkboxLabel = document.getElementById('checkbox-label');
+        var submitBtn = document.getElementById('submit-btn');
+
+        if (formTitle.innerText === 'Sign Up') {
+            formTitle.innerText = 'Sign In';
+            email.style.display = 'none';
+            emailLabel.style.display = 'none';
+            checkboxLabel.style.display = 'none';
+
+            form.action = 'index.html';  // Change this to the actual index.html
+            submitBtn.innerText = 'Sign In';
+            signInLink.innerHTML = 'Don\'t have an account? <a href="#">Sign Up</a>';
+        } else {
+            formTitle.innerText = 'Sign Up';
+            emailLabel.style.display = 'block';
+            email.style.display = 'block';
+            checkboxLabel.style.display = 'block';
+
+            form.action = 'index.html';  // Change this to the actual index.html
+            submitBtn.innerText = 'Sign Up';
+            signInLink.innerHTML = 'Already have an account? <a href="#">Sign In</a>';
+        }
+    });
+</script>
+
+</body>
+</html>
