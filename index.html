@@ -1,305 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-    <script async type="module" src="script.js"></script>
-    <!-- adding module will let us use modules in js file -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="front_style.css">
+</head>
+<body>
 
-    <title>Expense Tracker</title>
-
-    
-  </head>
-  <body>
-    <section class="welcome-section">
-     
-      <div id="welcome-message" style="font-size: 2em"></div>
-  </section>
-    <div class="container">
-      <div class="header">
-        <div class="header-headings">
-          <button class="add-btn active-tab" id="summaryBtn">Summary</button>
-          <button class="add-btn" id="expenseBtn">Expenses</button>
-          <button class="add-btn " id="incomeBtn">Income</button>
-        </div>
-      </div>
-      <div class="element-container">
-        <!-- income container -->
-        <div class="income-container hidden">
-          <div class="info">
-            <div class="info-add-new">
-              <!-- add new income  -->
-              <div class="income-info-add">
-                <h3>Add New Income</h3>
-                <form action="" id="incomeAddForm">
-                  <div class="formGroup">
-                    <label for="">Income:</label>
-                    <input
-                      type="number"
-                      id="newIncomeInput"
-                      placeholder="Enter your income"
-                    />
-                  </div>
-                  <div class="formGroup">
-                    <label for="">Source:</label>
-                    <select name="" id="existingIncomeSourceInput">
-                      <option value="salary">Salary</option>
-                      <option value="youtube">Business</option>
-                    </select>
-                  </div>
-                  <p>or add a new source</p>
-                  <div class="formGroup">
-                    <label for="">Source:</label>
-                    <input
-                      type="text"
-                      id="newIncomeSourceInput"
-                      placeholder="Add New Source"
-                    />
-                  </div>
-                  <div class="formGroup">
-                    <input type="submit" value="submit" />
-                  </div>
-                </form>
-              </div>
-              <!-- add new income  -->
-            </div>
-            <div class="info-summary">
-              <!-- income budget summary -->
-              <div class="income-info-summary">
-                <div class="income-budget-summary">
-                  <h3>Budget Plan</h3>
-                  <div class="budget-table">
-                    <table id="budgetTable">
-                      <thead>
-                        <th>Category</th>
-                        <th>Amount</th>
-                        <th>Action</th>
-                      </thead>
-                      <tbody id="incomeBudgetTableBody">
-                        <tr>
-                          <td>
-                            <input type="text" id="budgetCategoryInput" />
-                          </td>
-                          <td><input type="number" id="budgetInput" /></td>
-                          <td>
-                            <button id="budgetAddBtn" class="add-btn">
-                              add
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <!-- income budget summary -->
-            </div>
-          </div>
-          <div class="detail">
-            <div class="detail-category">
-              <!-- income chart -->
-              <div class="income-details">
-                <div class="totalincome-value">
-                  <table>
-                    <tbody id="incomeChartTableBody">
-                      <tr>
-                        <th>Total Income:</th>
-                        <th><p id="incomeValue"></p></th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <canvas id="incomeChart"></canvas>
-              </div>
-              <!-- income chart -->
-            </div>
-            <div class="detail-recents">
-              <!-- income budget compare -->
-              <div class="incomeBudgetCompare">
-                <table>
-                  <tbody id="budgetChartTableBody">
-                    <tr>
-                      <th>Total Budget:</th>
-                      <th><span id="incomeBudgetValue"></span></th>
-                    </tr>
-                  </tbody>
-                </table>
-                <table>
-                  <tbody>
-                    <tr>
-                      <th>Estimated Savings:</th>
-                      <th><span id="estimatedSavingsValue"></span></th>
-                    </tr>
-                  </tbody>
-                </table>
-                <canvas id="incBudCompareChart"></canvas>
-              </div>
-              <!-- income budget compare -->
-            </div>
-          </div>
-        </div>
-
-        <!-- expense container -->
-        <div class="expense-container hidden">
-          <div class="info">
-            <div class="info-add-new">
-              <!-- add new expense  -->
-              <div class="income-info-add">
-                <h3>Add New transaction</h3>
-                <form action="" id="expenseAddForm">
-                  <div class="expense-form-inputs">
-                    <div class="formGroup">
-                      <label for="">Expense:</label>
-                      <input
-                        type="number"
-                        id="newExpenseInput"
-                        placeholder="Enter amount"
-                      />
-                    </div>
-                    <div class="formGroup">
-                      <label for="">Tag:</label>
-                      <select name="" id="existingExpenseTagInput">
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="formGroup">
-                    <input type="submit" value="submit" />
-                  </div>
-                </form>
-              </div>
-              <!-- add new expense  -->
-            </div>
-            <div class="info-summary">
-              <!-- all expenses -->
-              <div class="all-expenses-div">
-                <h3>Latest Transactions</h3>
-                <div class="all-expenses">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Tag</th>
-                        <th>Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody id="allExpensesBody"></tbody>
-                  </table>
-                </div>
-              </div>
-
-              <!-- all expenses -->
-            </div>
-          </div>
-          <div class="detail">
-            <div class="detail-expense-category">
-              <!-- total category expenses -->
-              <h3>Category Expenses</h3>
-              <div class="">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Category</th>
-                      <th>Expense</th>
-                    </tr>
-                  </thead>
-                  <tbody id="catExpensesList"></tbody>
-                </table>
-              </div>
-              <!-- total category expenses -->
-            </div>
-            <div class="detail-expense-recents">
-              <!-- expense chart -->
-              <canvas id="expenseChart"></canvas>
-              <!-- expense chart -->
-            </div>
-          </div>
-        </div>
-
-        <!-- summary container -->
-        <div class="summary-container">
-          <div class="info">
-            <div class="info-add-new">
-              <!-- summary budget  -->
-              <div class="income-info-add summary-info-add">
-                <h3>Budget Plan</h3>
-                <div class="summary-budget-table">
-                  <table>
-                    <thead>
-                      <th>Category</th>
-                      <th>Amount</th>
-                    </thead>
-                    <tbody id="summaryIncomeBudgetTableBody"></tbody>
-                  </table>
-                </div>
-              </div>
-              <!-- summary budget  -->
-            </div>
-            <div class="info-summary summary-summary">
-              <!-- Category Expense -->
-              <h3>Category Expenses</h3>
-              <table>
-                  <thead>
-                    <tr>
-                      <th>Category</th>
-                      <th>Expense</th>
-                    </tr>
-                  </thead>
-                  <tbody id="summaryCatExpensesList"></tbody>
-                </table>
-              <!-- Category Expense -->
-
-              <!-- savings -->
-                <div class="summary-saving"><h3>Total Savings</h3><span id="summarySpan"></span></div>
-              <!-- savings -->
-            </div>
-          </div>
-          <div class="detail">
-            <div class="detail-summary-category">
-              <!-- summary income chart -->
-              <h2>Income Chart</h2>
-              <canvas id="SummaryIncomeChart"></canvas>
-              <!-- summary income chart -->
-            </div>
-            <div class="detail-summary-recents">
-              <h2>Expense Chart</h2>
-              <!-- summary expense chart -->
-              <canvas id="SummaryExpenseChart"></canvas>
-              <!-- summary expense chart -->
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- Navigation Bar -->
+<nav>
+    <div class="logo">
+        <img id="logo" src="./logo.png">
+        <span>Track Me</span>
     </div>
-    <script>
-      // Function to extract the value of a query parameter from the URL
-      function getQueryParam(param) {
-          const urlParams = new URLSearchParams(window.location.search);
-          return urlParams.get(param);
-      }
-  
-      // Function to display a welcome message with the user's name
-      function displayWelcomeMessage() {
-          const welcomeMessageContainer = document.getElementById('welcome-message');
-          const name = getQueryParam('name');
-  
-          if (name) {
-              welcomeMessageContainer.innerHTML = `<p>Welcome, ${name}!</p>`;
-          }
-      }
-  
-      // Call the function to display the welcome message
-      displayWelcomeMessage();
-  </script>
+    <ul>
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="login.html">Try for Free</a></li>
+        <li><a href="login.html">Sign In</a></li>
+    </ul>
+</nav>
+
+<!-- Header Section -->
+<header>
+    <h1 style="color: rgb(0, 110, 253);">Smart way </h1><h1> <span style="font-weight: 100;">to manage </span> <span style="color: rgb(0, 110, 253);"> personal finances </span></h1>
+    <p>Effortlessly manage and track your finances with our powerful tools.</p>
+</header>
+
+<!-- Main Section -->
+<section>
+    <!-- <img src="finance-tracker-image.jpg" alt="Finance Tracker in Action"> -->
+</section>
+
+<!-- Call-to-Action Section -->
+
+<div class="cta">
+    <a href="login.html" class="try-for-free-btn">Try for Free</a>
+</div>
+
+<div class="row">
+    <div class="columnimg1">
+        <img src="Transaction@4x.png" alt="Image 1" id="img1">
+    </div>
+    <div class="columntext1">
+        <h2>Simple money tracker</h2>
+        <p>It takes seconds to record daily transactions. <br>
+            Put them into clear and visualized categories such as
+            <br> Expense: Food, Shopping or Income: Salary, Gift.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="columntext2">
+
+      <h2>Painless budgeting</h2> 
+       <p>  Streamline your financial management effortlessly with our user-friendly tracker, ensuring stress-free budgeting and smarter spending.</p>
+    </div>
+    <div class="columnimg2">
+        <img src="budget@4x.png" alt="Image 4" id="img2">
+    </div>
+</div>
+
+<div class="row">
+    <div class="columnimg3">
+        <img src="REPORT@4x.png"  alt="Budjet" id="img3">
+    </div>
     
-  </body>
+    <div class="columntext3">
+        <h2>The whole picture in one place</h2>
+        <p>Capture the complete financial landscape in one glance with our all-in-one money tracker see the whole picture, effortlessly.</p>
+    </div>
+</div>
+
+<!-- About Us Section -->
+<section class="about-us">
+    <h2>About Us</h2>
+    <p>Welcome to Finance Tracker – where simplicity meets financial empowerment. <br>
+        Our mission is clear: to make life easier by providing you with intuitive tools to effortlessly manage and track your personal finances.
+        <br> Join us on this mission to simplify your financial life. 
+        </p>
+    <a href="#" class="learn-more-btn">Learn More</a>
+</section>
+
+<!-- Footer -->
+<footer>
+    <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+    </ul>
+</footer>
+
+</body>
 </html>
