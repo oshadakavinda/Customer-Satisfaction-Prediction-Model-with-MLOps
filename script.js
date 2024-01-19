@@ -39,11 +39,15 @@ class Tracker {
     this.incomeBtn = document.getElementById('incomeBtn');
     this.expenseBtn = document.getElementById('expenseBtn');
     this.summaryBtn = document.getElementById('summaryBtn');
+    this.budgetBtn = document.getElementById('budgetBtn');
+
     this.incomeDiv = document.querySelector('.income-container');
     this.expenseDiv = document.querySelector('.expense-container');
     this.summaryDiv = document.querySelector('.summary-container');
-    this.tabDivs = [this.incomeDiv, this.expenseDiv, this.summaryDiv];
-    this.tabBtns = [this.incomeBtn, this.expenseBtn, this.summaryBtn];
+    this.budgetDiv = document.querySelector('.budget-container');
+
+    this.tabDivs = [this.incomeDiv, this.expenseDiv, this.summaryDiv ,this.budgetDiv];
+    this.tabBtns = [this.incomeBtn, this.expenseBtn, this.summaryBtn ,this.budgetBtn];
 
     this.summaryBudgetTableBody = document.getElementById(
       'summaryIncomeBudgetTableBody'
@@ -51,11 +55,13 @@ class Tracker {
     this.summaryCategoryExpense = document.getElementById(
       'summaryCatExpensesList'
     );
-
+      
     //event handlers
     this.incomeBtn.addEventListener('click', this.showTab.bind(this));
     this.expenseBtn.addEventListener('click', this.showTab.bind(this));
     this.summaryBtn.addEventListener('click', this.showTab.bind(this));
+    this.budgetBtn.addEventListener('click', this.showTab.bind(this));
+    
   }
   showTab(e) {
     const clickedTab = e.target.id;
