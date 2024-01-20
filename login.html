@@ -26,10 +26,11 @@
         <button type="submit" id="submit-btn">Sign Up</button>
     </form>
 
-    <p class="signin-link" id="toggle-signin">Already have an account? <a href="#">Sign In</a></p>
+    <p class="signin-link" id="toggle-signin">Already have an account? <a href="#" id="loginSignInBtn">Sign In</a></p>
 </div>
 
 <script>
+    
     document.getElementById('toggle-signin').addEventListener('click', function() {
         var formTitle = document.getElementById('form-title');
         var email = document.getElementById("email");
