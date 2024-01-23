@@ -39,41 +39,59 @@ class Expense {
   }
 
   addExpense(newExpense, tag) {
-    // instantiating new array to be pushed into storage
-    let newTagArr = [];
-
     // get Latest id from last saved id
     const lastTagId = this.getLastTagId('expenses');
     const newId = lastTagId + 1;
 
     const tagObj = {
-      id: newId,
-      tag: tag,
-      expense: newExpense,
-      date: new Date().toISOString(), // Add the current date
+        id: newId,
+        tag: tag,
+        expense: newExpense,
+        date: new Date().toISOString(), // Add the current date
     };
 
     // getting stored values
     const storageExpenses = this.getStorageItem('expenses');
 
-    // Expenses
-    if (storageExpenses.length) {
-      newTagArr = [...storageExpenses, tagObj];
-    } else {
-      newTagArr.push(tagObj);
+    // Calculate total expense for the given tag
+    const totalExpenseForTag = storageExpenses.reduce((total, expense) => {
+        if (expense.tag === tag) {
+            return total + parseInt(expense.expense);
+        }
+        return total;
+    }, 0);
+
+    // Get the budget for the selected tag
+    const budgetForTag = this.tags.find(t => t.category === tag)?.budget || 0;
+
+    // Check if adding the new expense exceeds the budget
+    if (totalExpenseForTag + parseInt(newExpense) > budgetForTag) {
+        alert('Expense exceeds budget for this category!');
+        return; // Stop execution if budget is exceeded
     }
 
-    //changing class variables
+    // instantiating new array to be pushed into storage
+    let newTagArr;
+
+    // Expenses
+    if (storageExpenses.length) {
+        newTagArr = [...storageExpenses, tagObj];
+    } else {
+        newTagArr = [tagObj];
+    }
+
+    // changing class variables
     this.expenses = newTagArr;
 
-    //putting new expenses into storage
+    // putting new expenses into storage
     this.setstorageItem('expenses', newTagArr);
 
     // Update the UI without reloading the page
     this.getCategoryExepensesList();
     this.getAllExpenses();
     this.getexpenseChart();
-  }
+}
+
   
   getcategoryExpenses() {
     const expenseList = this.expenses.reduce((acc, curr) => {
@@ -123,6 +141,7 @@ class Expense {
     const newTagInput = document.getElementById(
       'existingExpenseTagInput'
     ).value;
+    
     this.addExpense(newExpenseInput, newTagInput);
   }
   getCategoryExepensesList() {
