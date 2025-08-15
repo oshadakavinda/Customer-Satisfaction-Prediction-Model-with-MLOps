@@ -1,0 +1,65 @@
+# Python cache
+**/__pycache__/
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment directories
+env/
+venv/
+.venv/
+Lib/
+lib/
+Scripts/
+bin/
+Include/
+include/
+Lib/site-packages/
+lib/site-packages/
+
+# Conda environment files
+*.lock
+conda-meta/
+pkgs/
+
+# VSCode settings
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# JupyterLab & nbextensions (specific to mlops project)
+mlops/etc/jupyter/nbconfig/
+mlops/share/jupyter/labextensions/
+mlops/share/jupyter/lab/settings/
+mlops/share/jupyter/nbextensions/
+mlops/share/jupyter/runtime/
+mlops/share/man/
+
+# ZenML artifacts & metadata
+.zenml/
+zenml_metadata/
+zenml_artifacts/
+
+# Data files
+data/
+*.csv
+*.tsv
+*.parquet
+*.xlsx
+
+# Logs
+*.log
+logs/
+logging/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# MLflow
+mlruns/
+mlartifacts/
