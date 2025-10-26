@@ -21,6 +21,18 @@ The dataset used is the Olist customers dataset (`data/olist_customers_dataset.c
 ## Installation
 Ensure you have Python 3.7+ installed. Install the required dependencies using:
 
+### 3. Activate Virtual Environment
+
+**Windows:**
+
+```bash
+# Command Prompt
+mlops\Scripts\activate
+
+
+# PowerShell
+mlops\Scripts\Activate
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -33,6 +45,14 @@ To run the training pipeline, execute:
 ```bash
 python run_pipeline.py
 ```
+
+zenml login --local --blocking
+
+zenml experiment-tracker register mlflow_tracker --flavor=mlflow
+
+zenml model-deployer register mlflow --flavor=mlflow
+
+zenml stack register mlflow_stack -a default -o default -d mlflow -e mlflow_tracker --set
 
 This will run the ZenML pipeline which ingests data, cleans it, trains the model, and evaluates the model.
 
